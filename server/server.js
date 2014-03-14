@@ -1,5 +1,6 @@
 
 Acts = new Meteor.Collection('acts');
+
 Meteor.publish("actsUpdated", function () {
   return Acts.find({});
 });
@@ -17,6 +18,7 @@ var twitter = Meteor.require('twitter'),
 var words = "help";
 
 Meteor.startup(function () {
+	Acts.remove({});
 
   Acts.remove({});
 
