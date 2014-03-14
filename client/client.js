@@ -4,7 +4,7 @@ var map;
 Acts.find().observe({
   added: function(act) {
     postMarker = L.marker([act.lat, act.lon]).addTo(map);
-    postMarker.bindPopup(act.description);
+    postMarker.bindPopup('<p>' + act.description + '</p><p><a href="https://twitter.com/intent/tweet?in_reply_to=' + act.id + '&hashtags=offertohelp">Offer to help</a></p><p><a href="https://twitter.com/intent/tweet?in_reply_to=' + act.id + '&hashtags=done">I did this</a></p>');
   }
 });
 
