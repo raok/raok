@@ -14,9 +14,11 @@ var twitter = Meteor.require('twitter'),
 });
 
 
-var words = "help with, card";
+var words = "help";
 
 Meteor.startup(function () {
+
+  Acts.remove({});
 
   var insertTweet = Meteor.bindEnvironment(function(tweet) {
     Acts.insert(tweet);
@@ -27,14 +29,21 @@ Meteor.startup(function () {
 		                track: words, 'lang':'en'
 		            }, function(stream) {
 		    stream.on('data', function(data) {
-		    	//if(typeof data.geo !== 'undefined' ){ // && typeof data.geo.coordinates !== 'undefined'){
-		    		console.log(data.geo, data.text);    
+		    	if(data.geo !== null ){ // && typeof data.geo.coordinates !== 'undefined'){
+		    		console.log(data.geo, data.text);
+            var latitude = data.geo.coordinates[0];
+            var longitude = data.geo.coordinates[1];
 		    		tweet = {};
 		    		tweet.description = data.text;
-		    		tweet.lat = (51.0+Math.random()).toString().substr(0,11);
-     				tweet.lon = (-0.0+Math.random()).toString().substr(0,11);
-     				tweet.id  = Number(data.id);
-		    		insertTweet(tweet);
+		    		// tweet.lat = (51.0+Math.random()).toString().substr(0,11);
+     				// tweet.lon = (-0.0+Math.random()).toString().substr(0,11);
+            tweet.lat = latitude;
+            tweet.lon = longitude;
+            tweet.id  = Number(data.id);
+            if ((latitude > 51 && latitude < 52) && (longitude > -1 && longitude < 1)) {
+              insertTweet(tweet);
+            }
+          }
 		    });
 		});
 	}
