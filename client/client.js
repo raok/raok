@@ -8,10 +8,6 @@ Acts.find().observe({
   }
 });
 
-function updateActs() {
-  console.log('hi');
-}
-
 Template.hello.greeting = function () {
   return "Welcome to raok.";
 };

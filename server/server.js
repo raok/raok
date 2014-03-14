@@ -23,11 +23,15 @@ Meteor.startup(function () {
   Acts.remove({});
 
   for (var i=0; i<10; i++) {
-    var act = {
-      lat: (51+Math.random()).toString().substr(0,11),
-      lon: (-Math.random()).toString().substr(0,11),
-      description: "Random description Nr. "+i
-    };
-    Acts.insert(act);
+    insertAct("random "+i)
   }
 });
+
+function insertAct(tweet) {
+  var act = {
+    lat: (51.00+Math.random()).toString().substr(0,11),
+    lon: (-0.00+Math.random()).toString().substr(0,11),
+    description: tweet
+  };
+  Acts.insert(act);
+}
