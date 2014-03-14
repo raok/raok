@@ -35,7 +35,7 @@ Meteor.startup(function () {
 		    		tweet.description = data.text;
 		    		tweet.lat = (51.0+Math.random()).toString().substr(0,11);
      				tweet.lon = (-0.0+Math.random()).toString().substr(0,11);
-     				tweet.id  = Number(data.id);
+     				tweet.id  = String(data.id);
 		    		insertTweet(tweet);
 		    });
 		});
