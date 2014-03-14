@@ -30,6 +30,10 @@ If you are new to meteor, we suggest you look at (*try*) one of the tutorials:
 - Easiest "From Scratch" tutorial: https://www.openshift.com/blogs/day-15-meteor-building-a-web-app-from-scratch-in-meteor
 - More tutorials (if you need them) https://www.meteor.com/learn-meteor
 
+### 
+
+http://ikertxu.tumblr.com/post/56686134143/node-js-socket-io-and-the-twitter-streaming-api-in
+
 
 ### Twitter API 
 
