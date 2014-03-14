@@ -1,3 +1,8 @@
+Acts = new Meteor.Collection('acts');
+Meteor.publish("actsUpdated", function () {
+  return Acts.find({});
+});
+
 var twitter = Meteor.require('twitter'),
 	util = Meteor.require('util'),
 	twit = new twitter({
@@ -9,5 +14,20 @@ var twitter = Meteor.require('twitter'),
 
 twit.search('help', function(data) {
     console.log(util.inspect(data));
-    
+
+});
+
+
+Meteor.startup(function () {
+  // code to run on server at startupf
+  Acts.remove({});
+
+  for (var i=0; i<10; i++) {
+    var act = {
+      lat: (51+Math.random()).toString().substr(0,11),
+      lon: (-Math.random()).toString().substr(0,11),
+      description: "Random description Nr. "+i
+    };
+    Acts.insert(act);
+  }
 });
