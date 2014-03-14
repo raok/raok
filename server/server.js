@@ -1,3 +1,4 @@
+
 Acts = new Meteor.Collection('acts');
 Meteor.publish("actsUpdated", function () {
   return Acts.find({});
@@ -12,26 +13,33 @@ var twitter = Meteor.require('twitter'),
     access_token_secret: 'iKuvsT3tZd0Mk8ACUCfi6KzeN3Fvbr5EnyzDyHIlUgrrA'
 });
 
-twit.search('help', function(data) {
-    console.log(util.inspect(data));
 
-});
-
+var words = "help with, card";
 
 Meteor.startup(function () {
-  // code to run on server at startupf
-  Acts.remove({});
 
-  for (var i=0; i<10; i++) {
-    insertAct("random "+i)
-  }
+  var insertTweet = Meteor.bindEnvironment(function(tweet) {
+    Acts.insert(tweet);
+  });
+
+	function getTweets(callback){
+		twit.stream("statuses/filter", {
+		                track: words, 'lang':'en'
+		            }, function(stream) {
+		    stream.on('data', function(data) {
+		    	//if(typeof data.geo !== 'undefined' ){ // && typeof data.geo.coordinates !== 'undefined'){
+		    		console.log(data.geo, data.text);    
+		    		tweet = {};
+		    		tweet.description = data.text;
+		    		tweet.lat = (51.0+Math.random()).toString().substr(0,11);
+     				tweet.lon = (-0.0+Math.random()).toString().substr(0,11);
+     				tweet.id  = Number(data.id);
+		    		insertTweet(tweet);
+		    });
+		});
+	}
+
+	getTweets(function(){
+		console.log('done');
+	});
 });
-
-function insertAct(tweet) {
-  var act = {
-    lat: (51.00+Math.random()).toString().substr(0,11),
-    lon: (-0.00+Math.random()).toString().substr(0,11),
-    description: tweet
-  };
-  Acts.insert(act);
-}
