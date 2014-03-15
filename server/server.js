@@ -15,12 +15,10 @@ var twitter = Meteor.require('twitter'),
 });
 
 
-var words = "help";
+var words = "need help";
 
 Meteor.startup(function () {
 	Acts.remove({});
-
-  Acts.remove({});
 
   var insertTweet = Meteor.bindEnvironment(function(tweet) {
     Acts.insert(tweet);
@@ -45,6 +43,8 @@ Meteor.startup(function () {
             if ((latitude > 51 && latitude < 52) && (longitude > -1 && longitude < 1)) {
               insertTweet(tweet);
             }
+          } else {
+          	console.log(data.geo, " [no geo] ", data.text);
           }
 		    });
 		});

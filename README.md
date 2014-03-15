@@ -24,21 +24,28 @@ A website (mobile friendly) that anyone can use to post/find tasks and request/g
 
 ## HOW
 
-We built this app in [Meteor](https://www.meteor.com/).
+### Meteor
 
-If you are new to meteor, we suggest you look at (*try*) one of the tutorials:
+We built this app in [Meteor](https://www.meteor.com/) 
+(good for *rapid prototyping* with "*full stack reactivity*")
+
+If you are new to meteor, we suggest you look at (and *try*) one of the tutorials:
 - Easiest "From Scratch" tutorial: https://www.openshift.com/blogs/day-15-meteor-building-a-web-app-from-scratch-in-meteor
 - More tutorials (if you need them) https://www.meteor.com/learn-meteor
 
-### 
+### Twitter API
 
-http://ikertxu.tumblr.com/post/56686134143/node-js-socket-io-and-the-twitter-streaming-api-in
+We decided to use Twitter to determine if people are requesting help.
+And if they have allowed twitter to plot their geolocaiton (Lat/Lon)
 
+There are many twitter related node modules: 
+https://nodejsmodules.org/tags/twitter
 
-### Twitter API 
+We just need a module that talks **Streaming API**.
+**Twitter** by *desmondmorris* matches our needs:
+- NPM: https://www.npmjs.org/package/twitter
+- GitHub: https://github.com/desmondmorris/node-twitter
 
-- Key: UlNZhS7PiZVB9TuUjnyWQ
-- Secret: G8RxvSGcI3KTcLnD8DW5YOyUQkjYf0tsH34J90
+#### Useful Examples
 
-> **@Andy** please *re-generate keys* (and put them in the config.js) 
-> once we deploy so *bots* don't use our keys. Thanks.
+- http://ikertxu.tumblr.com/post/56686134143/node-js-socket-io-and-the-twitter-streaming-api-in
