@@ -30,7 +30,7 @@ Map = function() {
   };
 
   map.addPin = function(act) {
-    var postMarker = L.marker([act.lat, act.lon]).addTo(map.$el);
+    var postMarker = L.marker([act.lat, act.lng]).addTo(map.$el);
     postMarker.bindPopup('<p>' + act.description + '</p><p><a href="https://twitter.com/intent/tweet?in_reply_to=' + act.id + '&hashtags=offertohelp">Offer to help</a></p><p><a href="https://twitter.com/intent/tweet?in_reply_to=' + act.id + '&hashtags=done">I did this</a></p>');
   };
 

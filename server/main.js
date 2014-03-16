@@ -1,7 +1,7 @@
 Meteor.publish("actsUpdated", function (bounds) {
   var acts = Acts.find({
     lat: { $gte: bounds.minLat, $lte: bounds.maxLat },
-    lon: { $gte: bounds.minLong, $lte: bounds.maxLong }
+    lng: { $gte: bounds.minLong, $lte: bounds.maxLong }
   });
   return acts;
 });
@@ -37,7 +37,7 @@ Meteor.startup(function () {
 		    		tweet = {};
 		    		tweet.description = data.text;
             tweet.lat = latitude;
-            tweet.lon = longitude;
+            tweet.lng = longitude;
             tweet.id  = Number(data.id);
             insertTweet(tweet);
           }
