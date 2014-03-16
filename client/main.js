@@ -5,7 +5,9 @@ Deps.autorun(function() {
 var map = Map();
 
 Acts.find().observe({
-  added: map.addPin
+  added: map.addPin,
+  removed: map.removePin,
+  changed: map.updatePin
 });
 
 Template.hello.greeting = function () {
