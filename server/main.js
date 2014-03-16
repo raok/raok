@@ -1,4 +1,5 @@
 Meteor.publish("actsUpdated", function (bounds) {
+  if (!bounds) return null;
   var acts = Acts.find({
     lat: { $gte: bounds.minLat, $lte: bounds.maxLat },
     lng: { $gte: bounds.minLong, $lte: bounds.maxLong }
@@ -15,6 +16,11 @@ var twitter = Meteor.require('twitter'),
     access_token_secret: 'iKuvsT3tZd0Mk8ACUCfi6KzeN3Fvbr5EnyzDyHIlUgrrA'
 });
 
+function removePostsOlderThan(date) {
+  Acts.remove({
+    lastTouched: { $lt: date }
+  });
+}
 
 var words = "help";
 
@@ -22,6 +28,7 @@ Meteor.startup(function () {
   Acts.remove({});
 
   var insertTweet = Meteor.bindEnvironment(function(tweet) {
+    tweet.lastTouched = new Date().getTime();
     Acts.insert(tweet);
   });
 
@@ -44,6 +51,10 @@ Meteor.startup(function () {
 		    });
 		});
 	}
+
+  Meteor.setInterval(function() {
+    removePostsOlderThan(new Date()-DateHelper.hour);
+  },DateHelper.hour);
 
 	getTweets(function(){
 		console.log('done');
