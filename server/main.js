@@ -46,9 +46,7 @@ Meteor.startup(function () {
             tweet.lat = latitude;
             tweet.lng = longitude;
             tweet.id  = Number(data.id);
-            if ((latitude > 51 && latitude < 52) && (longitude > -1 && longitude < 1)) {
-              insertTweet(tweet);
-            }
+            insertTweet(tweet);
           } else {
           	console.log(data.geo, " [no geo] ", data.text);
           }
